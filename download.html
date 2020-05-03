@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script type="text/javascript" src="./qrcode.js"></script>
+</head>
+
+<body>
+  <div class="main">
+  </div>
+
+  <script type="text/javascript">
+
+    function init() {
+      var userAgent = navigator.userAgent.toLowerCase()
+
+      var heytapbrowser = userAgent.indexOf('heytapbrowser')
+      var oppobrowser = userAgent.indexOf('oppobrowser')
+
+      if (heytapbrowser <= -1 && oppobrowser <= -1) {
+        alert('请使用oppo浏览器打开！')
+      } else {
+        let pkg = getPkg(userAgent)
+        let android = getUrlParam('android')
+        let coloros = getUrlParam('coloros')
+        let heytap = getUrlParam('heytap')
+        switch (+pkg) {
+          case 10: // android
+            window.open(android)
+            break
+          case 20: // coloros
+            window.open(coloros)
+            break
+          case 40: // heytap
+            window.open(heytap)
+            break
+          default: // android
+            window.open(android)
+            break
+        }
+      }
+    }
+
+    function getPkg(userAgent) {
+      let tempArr = userAgent.split('/')
+      let versionFull = tempArr[tempArr.length - 1]
+      let version = versionFull.split('.')[0]
+      return version
+    }
+
+    function getUrlParam(name) {
+      let reg = new RegExp('(^|&?)' + name + '=([^&]*)(&|$)', 'i')
+      let r = window.location.href.match(reg)
+      if (r) {
+        return r[2]
+      } else {
+        return ''
+      }
+    }
+
+    init()
+
+
+  </script>
+</body>
+
+</html>

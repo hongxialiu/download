@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>二维码生成</title>
+  <script type="text/javascript" src="./qrcode.js"></script>
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  html,
+  body {
+    width: 750px;
+    margin: 0 auto;
+  }
+
+  .main {
+    margin: 40px;
+    width: 750px;
+  }
+
+  .item-group {
+    margin-bottom: 20px;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+  }
+
+  label {
+    width: 70px;
+  }
+
+  input {
+    width: 500px;
+    height: 36px;
+    text-indent: 10px;
+    font-size: 14px;
+  }
+
+  .qrCode {
+    margin-left: 150px;
+    margin-top: 40px;
+    width: 200px;
+    height: 200px;
+  }
+
+  .txt {
+    margin-left: 150px;
+    margin-top: 20px;
+  }
+  button {
+    width: 100px;
+    text-align: center;
+    line-height: 36px;
+    cursor: pointer;
+    margin-left: 70px;
+    margin-bottom: 20px;
+  }
+</style>
+
+<body>
+  <div class="main">
+    <div class="item-group">
+      <label for="android">android:</label>
+      <input type="text" id="android" value="">
+    </div>
+    <div class="item-group">
+      <label for="coloros">coloros:</label>
+      <input type="text" id="coloros" value="">
+    </div>
+    <div class="item-group">
+      <label for="heytap">heytap:</label>
+      <input type="text" id="heytap" value="">
+    </div>
+
+    <div class="btn">
+      <button onclick="makeCode()">生成</button>
+    </div>
+    <div class="item-group">
+      <span id="text"></span>
+    </div>
+
+    <div class="qrCode" id="qrcode">
+
+    </div>
+    <div class="txt">请使用oppo浏览器扫描安装</div>
+  </div>
+
+  <script type="text/javascript">
+
+    var qrcode = new QRCode(document.getElementById("qrcode"), {
+      width: 200,
+      height: 200
+    });
+
+    function makeCode() {
+      var android = document.getElementById("android").value;
+      var coloros = document.getElementById("coloros").value;
+      var heytap = document.getElementById("heytap").value;
+      var elText = document.getElementById("text");
+
+      var text = `http://192.168.0.100:8099/download.html?android=${android}&coloros=${coloros}&heytap=${heytap}`
+
+      elText.innerHTML = text
+
+
+      qrcode.makeCode(text);
+    }
+
+    makeCode()
+
+
+  </script>
+</body>
+
+</html>
